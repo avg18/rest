@@ -1,0 +1,7 @@
+- config:
+  - testset: "Quickstart"
+
+- test:
+  - group: "Quickstart"
+  - name: "Basic smoketest"
+  - url: "/v1.0/documents"
