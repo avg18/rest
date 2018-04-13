@@ -15,7 +15,7 @@ just one out of the two following options is required:
  $ conda env create -f environment-rest.yml
 ````
 
-**or just libraries:** (API tests wont work)
+**or just libraries:** (Tests wont work)
 ````
 Note: <> denotes changes to be made
  $ conda create --name <env-name> --file requirements.txt
