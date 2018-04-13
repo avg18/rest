@@ -24,7 +24,7 @@ Note: <> denotes changes to be made
 
 
 ## Run
-Run app in in the environment. 
+Run app.py in environment. 
 
 # API
 
