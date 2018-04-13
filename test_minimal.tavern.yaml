@@ -1,0 +1,43 @@
+---
+# Every test file has one or more tests...
+test_name: "Simple Smoke Tests: GET"
+stages:
+  - name: GetDocument
+
+    request:
+      url: http://localhost:9090/v1.0/documents
+      method: GET
+
+    response:
+      status_code: 200
+---
+test_name: "Simple Smoke Tests: POST"
+stages:
+  - name: PostDocument
+
+    request:
+      url: http://localhost:9090/v1.0/documents
+      json:
+        description: "hi"
+        name: "test"
+      method: POST
+
+    response:
+      status_code: 200
+
+---
+test_name: "Simple Smoke Tests: POST- FAILED"
+stages:
+  - name: PostDocument Failure
+
+    request:
+      url: http://localhost:9090/v1.0/documents
+      json:
+        description: ""
+        name: "test"
+      method: POST
+
+    response:
+      status_code: 400
+
+

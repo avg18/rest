@@ -1,0 +1,5 @@
+[
+  "test_minimal.tavern.yaml::Simple Smoke Tests: GET",
+  "test_minimal.tavern.yaml::Simple Smoke Tests: POST",
+  "test_minimal.tavern.yaml::Simple Smoke Tests: POST- FAILED"
+]
