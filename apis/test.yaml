@@ -1,0 +1,97 @@
+swagger: "2.0"
+
+info:
+  title: "Intranet document shelf"
+  version: "1.0"
+
+basePath: /v1.0
+
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /documents:
+    get:
+      tags: [Documents]
+      operationId: documents.document.get_documents
+      summary: fetch all documents
+      responses:
+        200:
+          description: Return documents
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/document'
+      externalDocs:
+        url: http://api.example.com/docs/user-operations/
+        
+    post:
+      tags: [Documents]
+      operationId: documents.document.post_document
+      summary: create new document
+      parameters:
+        - in: body
+          name: document
+          required: true
+          schema:
+            $ref: '#/definitions/document'
+      responses:
+        '201':
+          description: 'new document'
+  
+  '/documents/{id}':
+    get:
+      tags: [Documents]
+      operationId: documents.document.get_document
+      summary: fetch document with id
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 'fetch document'
+          schema:
+            $ref: '#/definitions/document'
+
+
+definitions:
+
+  document:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier
+        example: "6f92a71a-7e97-49d6-9b40-a1a318080489"
+        readOnly: true
+      name:
+        type: string
+        description: document name
+        example: "Important AVG document"
+        minLength: 1
+        maxLength: 100
+      timestamp:
+        type: string
+        description: "creation time"
+        example: "2018-03-26 18:25:27.742112"
+        readOnly: true
+      description:
+        type: string
+        example: "document abstract"
+        minLength: 1
+        maxLength: 100
+      version:
+        type: integer
+        example: 1
+        minLength: 1
+        maxLength: 100
+  links:
+    type: array
+    description: Unique identifier
+    items:
+      type: string
+
+    
