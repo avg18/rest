@@ -29,7 +29,7 @@ class Document(object):
         con['description'] = self.beschreibung
         con['version'] = self.version
         con['links'] = [{'rel': 'self', 'href':f'{URI}/documents/{self.id}'},
-                        {'rel': 'self.description', 'href':f'{URI}/documents/description/{self.id}'} ]
+                        {'rel': 'self.description', 'href':f'{URI}/documents/descriptions/{self.id}'} ]
         return con
 
 ###
@@ -38,9 +38,12 @@ class Document(object):
 def JSON_description(container, _id):
     con = {}
     con['description'] = container[_id]['description']
-    con['links'] = [{'rel': 'self', 'href':f'{URI}/documents/description/{_id}'}, 
+    con['links'] = [{'rel': 'self', 'href':f'{URI}/documents/descriptions/{_id}'}, 
                     {'rel': 'self.document', 'href':f'{URI}/documents/{_id}'}]
     return con
+
+def uri_doc(_id):
+    return {'rel': 'self', 'href':f'{URI}/documents/{_id}'}
 
 ###
 # CONTROLLER
@@ -71,18 +74,31 @@ def get_descriptions():
     ids = list(DOC.keys())
     return [JSON_description(DOC,_id) for _id in ids]
 
+def change_description(id, abstract):
+    
+    if not valid_uuid(id):
+        return ('Not found', 404) 
+
+    _id = uuid.UUID(id)
+    doc = DOC.get(_id)
+
+    doc['description'] = abstract
+    return uri_doc(_id), 200
+
 def get_description(id):
     _id = uuid.UUID(id)
     return JSON_description(DOC,_id)
 
 def post_document(document):
     logger.info(document)
-    add_document(document['name'],document['description'])
+    doc = add_document(document['name'],document['description'])
+    return uri_doc(doc.id), 200
     
 def add_document(name, beschreibung=None, version = 0):
     doc_item = Document(name, beschreibung, version)
     logger.info(doc_item)
     DOC[doc_item.id]= doc_item.JSON_Container()
+    return doc_item
     
 if __name__ == '__main__':
     print(Document('Important Document'))

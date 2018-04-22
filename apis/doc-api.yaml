@@ -57,6 +57,29 @@ paths:
           description: 'document does not exist'
 
   '/documents/descriptions/{id}':
+
+    put:
+      tags: [Abstract]
+      operationId: documents.document.change_description
+      summary: change abstract of document
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+      - in: body
+        name: abstract
+        required: true
+        schema:
+          $ref: '#/definitions/beschreibung'
+      responses:
+        '200':
+          description: 'description document'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/beschreibung'
+
     get:
       tags: [Abstract]
       operationId: documents.document.get_description

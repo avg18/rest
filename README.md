@@ -2,6 +2,13 @@
 
 RESTful API for dummy book shelf.
 
+# Techstack
+
+Python = 3.6 mit connexion für Swagger integration.
+Api Dokumentation: SWAGGER
+Tests: Tavern
+
+
 ## Prerequisites
 
 Install Conda: https://conda.io/miniconda.html
